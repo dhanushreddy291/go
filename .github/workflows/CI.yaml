@@ -25,3 +25,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/go:http-server
+          platforms: all

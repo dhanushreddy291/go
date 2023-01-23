@@ -11,5 +11,5 @@ func main() {
 }
 
 func HelloServer(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hello, from Docker🐳\n.This container is made by CI/CD via CircleCI%s!", r.URL.Path[1:])
+    fmt.Fprintf(w, "Hello, from Docker🐳\n.This container is made by CI/CD via Github Actions%s!", r.URL.Path[1:])
 }
