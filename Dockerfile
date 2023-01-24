@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:buster
 WORKDIR /server
 COPY main.go main.go
 EXPOSE 80

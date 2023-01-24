@@ -27,15 +27,19 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-      - name: Get Image sha256
-        run: |
-          IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure"
-          IMAGE_SHA256=$(docker images --no-trunc --quiet ${IMAGE_NAME})
-          echo "SHA256=${IMAGE_SHA256}" >> $GITHUB_ENV
+    outputs:
+      imageDigest: ${{ steps.build-and-push.outputs.digest }}
+
+  deploy:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ secrets.AZURE_WEB_APP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: "docker.io/${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure@${{ env.SHA256 }}"
+          images: "docker.io/${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure@${{ needs.build.outputs.imageDigest }}"
