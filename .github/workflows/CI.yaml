@@ -27,10 +27,10 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure
           platforms: linux/amd64,linux/arm64,linux/arm/v7
+        run: echo "test=hello" >> $GITHUB_OUTPUT
     outputs:
       imageDigest: ${{ steps.build-and-push.outputs.digest }}
-    run: |
-      echo "The imageDigest is ${imageDigest}"
+      tempval: ${{ steps.build-and-push.outputs.test }}
 
   deploy:
     permissions:
@@ -41,6 +41,7 @@ jobs:
       - name: printer
         run: |
           echo "The sha256 is ${{ needs.build.outputs.imageDigest }}"
+          echo "The temp val is ${{ needs.build.outputs.test }}"
   #     - name: Deploy to Azure Web App
   #       id: deploy-to-webapp
   #       uses: azure/webapps-deploy@v2
