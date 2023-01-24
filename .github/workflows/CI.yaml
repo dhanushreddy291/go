@@ -42,7 +42,8 @@ jobs:
       - name: printer
         run: |
           echo "The sha256 is ${{ needs.build.outputs.imageDigest }}"
-          echo "The temp val is ${{ needs.build.outputs.test }}"
+          echo "The temp val is ${{ needs.build.outputs.tempval }}"
+          echo "The test val is ${{ needs.build.outputs.test }}"
   #     - name: Deploy to Azure Web App
   #       id: deploy-to-webapp
   #       uses: azure/webapps-deploy@v2
