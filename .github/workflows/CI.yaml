@@ -38,7 +38,7 @@ jobs:
     steps:
       - name: printer
         run: |
-          echo "The sha256 is ${{ needs.build.outputs.imageDigest }}" >> $GITHUB_OUTPUT
+          echo "The sha256 is ${{ needs.build.outputs.imageDigest }}"
   #     - name: Deploy to Azure Web App
   #       id: deploy-to-webapp
   #       uses: azure/webapps-deploy@v2
