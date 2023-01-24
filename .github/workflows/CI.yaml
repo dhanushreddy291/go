@@ -32,13 +32,6 @@ jobs:
           IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure"
           IMAGE_SHA256=$(docker images --no-trunc --quiet ${IMAGE_NAME})
           echo "SHA256=${IMAGE_SHA256}" >> $GITHUB_ENV
-
-  deploy:
-    permissions:
-      contents: none
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
