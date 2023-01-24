@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM golang:latest
 WORKDIR /server
 COPY main.go main.go
 EXPOSE 80
