@@ -27,11 +27,13 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-      - name: a test
-        run: echo "test=hello" >> $GITHUB_OUTPUT
+      - name: test
+        run: |
+          echo "test=hello" >> $GITHUB_OUTPUT
+          echo "The shaa256 is ${{ steps.build-and-push.outputs.digest }}"
     outputs:
       imageDigest: ${{ steps.build-and-push.outputs.digest }}
-      tempval: ${{ steps.a-test.outputs.test }}
+      tempval: ${{ steps.test.outputs.test }}
 
   deploy:
     permissions:
