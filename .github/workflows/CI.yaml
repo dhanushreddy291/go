@@ -31,7 +31,7 @@ jobs:
         run: echo "test=hello" >> $GITHUB_OUTPUT
     outputs:
       imageDigest: ${{ steps.build-and-push.outputs.digest }}
-      tempval: ${{ steps.build-and-push.outputs.test }}
+      tempval: ${{ steps.a-test.outputs.test }}
 
   deploy:
     permissions:
