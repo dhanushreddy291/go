@@ -27,6 +27,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure
           platforms: linux/amd64,linux/arm64,linux/arm/v7
+      - name: a test
         run: echo "test=hello" >> $GITHUB_OUTPUT
     outputs:
       imageDigest: ${{ steps.build-and-push.outputs.digest }}
