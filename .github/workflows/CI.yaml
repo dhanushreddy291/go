@@ -41,3 +41,5 @@ jobs:
           app-name: ${{ secrets.AZURE_WEB_APP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           images: "docker.io/${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure"
+      - name: Restart Azure Web App
+        run: az webapp restart --name ${{ secrets.AZURE_WEB_APP_NAME }} --resource-group ${{ secrets.AZURE_WEBAPP_RESOURCE_GROUP }}
