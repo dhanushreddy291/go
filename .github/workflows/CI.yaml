@@ -27,6 +27,8 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-azure
           platforms: linux/amd64,linux/arm64,linux/arm/v7
+        outputs:
+          imageDigest: ${{ steps.build-and-push.outputs.imageDigest }}
 
   deploy:
     permissions:
