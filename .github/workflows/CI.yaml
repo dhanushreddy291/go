@@ -24,20 +24,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-gcp
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go:http-server
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@v0
-        with:
-          image: ${{ secrets.DOCKERHUB_USERNAME }}/go:http-server-gcp
-          project_id: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
-          service_name: go-http-server-gcp
-          region: us-central1
-          credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
